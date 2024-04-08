@@ -10,6 +10,17 @@ const routes = [
     component: () => import('@/views/pages/Register/Home.vue')
   },
   {
+    path: '/credito',
+    name: 'credito',
+    component: () => import('@/views/pages/Credito/Home.vue')
+
+  },
+  {
+	path:'/simulacion',
+	name:'simulacion',
+    component: () => import('@/views/pages/SimulateCredit/Home.vue')
+  },
+  {
     path: '/inicio',
     name: 'inicio',
 
@@ -27,7 +38,7 @@ const routes = [
     component: () => import('@/views/pages/Review/Home.vue')
   },
   {
-    path: '/*',
+    path: '/',
     redirect: 'inicio',
   }
 ]
