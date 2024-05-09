@@ -1,35 +1,58 @@
 <template>
-	<v-form ref="form" v-model="valid" class="mt-5" lazy-validation>
-		<v-row>
-			<v-col md="5" sm="12" xs="12" cols="12">
-				<v-text-field dense outlined v-model="email" :rules="emailRules" label="Correo electrónico"
-					required></v-text-field>
-				<v-text-field dense outlined v-model="name" :counter="10" :rules="requiredRule" label="Cédula"
-					required></v-text-field>
-				<v-text-field dense outlined v-model="code" :counter="6" :rules="requiredRule" label="Código dactilar"
-					required></v-text-field>
+	<v-form class="pa-5 rounded justify-space-around" ref="form" v-model="valid" lazy-validation>
+		<v-row class=" d-flex justify-center">
+
+			<v-col class="justify-center align-center" cols="12" sm="8" md="5" lg="5" xl="4">
+				<v-img max-height="200" class="imgDni" src="@/assets/img/cedula.png" />
 			</v-col>
-			<v-col md="7" justify="center" style="display: flex;">
-				<v-img max-height="250" class="imgDni" src="@/assets/img/cedula.png" />
-			</v-col>
+
+
+			<v-row class="pa-4 justify-center align-center">
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
+					<v-row class="flex-column" dense>
+						<p class="ml-2" style="color: #9f9ea2;">Correo electrónico</p>
+						<v-text-field class="rounded-lg" label="Ej.mmm@gmail.com" solo full-width
+							background-color="#f4f4f4" flat v-model="email" :rules="emailRules"
+							@keypress="handleKeyPress">
+						</v-text-field>
+					</v-row>
+				</v-col>
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
+					<v-row class="flex-column " dense>
+						<p class="ml-2" style="color: #9f9ea2;">Cédula</p>
+						<v-text-field class="rounded-lg" label="Ej. 0000000000" solo full-width
+							background-color="#f4f4f4" flat v-model="name" :counter="10" :rules="requiredRule"
+							type="text" @keypress="handleKeyCant">
+						</v-text-field>
+					</v-row>
+				</v-col>
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
+					<v-row class="flex-column " dense>
+						<p class="ml-2" style="color: #9f9ea2;">Código dactilar</p>
+						<v-text-field class="rounded-lg" label="Ej. 0000000000" solo full-width
+							background-color="#f4f4f4" flat v-model="code" :counter="10" :rules="requiredRule"
+							type="text" @keypress="handleKeyCant">
+						</v-text-field>
+					</v-row>
+				</v-col>
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
+					<v-checkbox class="ml-3" v-model="checkbox" :rules="[v => !!v || 'Acepte para continuar!']"
+						label="Acepto la revisión de mis datos financieros" required></v-checkbox>
+				</v-col>
+
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
+					<v-row class="justify-center">
+						<v-col cols="12" sm="6" md="10" lg="6" xl="5">
+							<Button text="Regresar" :isText="true" :click="() => { $router.push('/inicio') }" />
+						</v-col>
+						<v-col cols="12" sm="6" md="10" lg="6" xl="5">
+							<Button text="Continuar" :click="validate" />
+						</v-col>
+
+					</v-row>
+				</v-col>
+			</v-row>
 		</v-row>
-		<v-checkbox v-model="checkbox" :rules="[v => !!v || 'Acepte para continuar!']"
-			label="Acepto la revisión de mis datos financieros" required></v-checkbox>
-
-		<v-col cols="3">
-			<Button text="Continuar" :click="validate" />
-		</v-col>
-		<!-- <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-			Continuar
-		</v-btn> -->
-		<!-- 
-        <v-btn color="error" class="mr-4" @click="reset">
-            Reset Form
-        </v-btn>
-
-        <v-btn color="warning" @click="resetValidation">
-            Reset Validation
-        </v-btn> -->
 	</v-form>
 </template>
 <script>
@@ -43,12 +66,14 @@ export default {
 		code: '',
 		requiredRule: [
 			v => !!v || 'Campo requerido',
+			v => /^\d+$/.test(v) || 'Solo se permiten números',
+			v => /^[0-9]+$/.test(v) || 'No se permiten caracteres especiales o letras',
+		],
+		emailRules: [
+			v => !!v || 'Campo requerido',
+			v => /.+@.+\..+/.test(v) || 'Correo inválido',
 		],
 		email: '',
-		emailRules: [
-			v => !!v || 'Correo es requerido',
-			v => /.+@.+\..+/.test(v) || 'Correo no válido',
-		],
 		select: null,
 		items: [
 			'Item 1',
@@ -62,6 +87,27 @@ export default {
 		Button
 	},
 	methods: {
+		handleKeyCant(event) {
+			const KeyCode = event.keyCode;
+
+			if ((KeyCode < 48 || KeyCode > 57) && KeyCode !== 46) {
+				event.preventDefault();
+				this.$toast.error('Solo se permiten números');
+			}
+		},
+		handleKeyPress(event) {
+			const keyCode = event.keyCode;
+			const key = event.key;
+
+			// Verificar si es una letra mayúscula
+			if (key.toUpperCase() === key && key.toLowerCase() !== key && keyCode !== 20) {
+				event.preventDefault();
+				this.$toast.error('No se permiten letras mayúsculas');
+			}
+		},
+
+
+
 		validate() {
 			this.$refs.form.validate() && this.$emit('success', 2)
 		},

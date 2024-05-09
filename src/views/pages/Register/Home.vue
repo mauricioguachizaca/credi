@@ -1,5 +1,4 @@
 <template>
-    <div>
         <v-container>
             <v-stepper dense v-model="step">
                 <v-stepper-header>
@@ -42,10 +41,7 @@
                     </v-stepper-content>
                 </v-stepper-items>
             </v-stepper>
-
         </v-container>
-    </div>
-
 </template>
 <script>
 import Identification from './components/Identification.vue'

@@ -127,7 +127,7 @@ export default {
               amount: this.minAmount,
               term: this.minMonths
             };
-            const response = await fetch('http://54.211.53.237:4000/api/credit/simulate', {
+            const response = await fetch('http://20.84.48.225:5008/api/credit/simulate', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(cuerpoSolicitud)

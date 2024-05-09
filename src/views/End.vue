@@ -2,36 +2,33 @@
 	<div>
 		<v-row justify="center">
 			<v-col rows="2" class="mt-10 mb-10" md="5" sm="5" xs="5">
-
 				<v-img alt="hola avatar" :src="homeImage" height="auto" width="500px" />
-
 			</v-col>
 			<v-col rows="2" style="text-align: justify;" class="mt-10 mb-10" md="3" sm="5" xs="5">
 				<h2 class="mt-5 initial primary--text">¡Tu solicitud de crédito ingresó con éxito!</h2><br />
-
 				<body-1>Recibimos tu solicitud de crédito por $2.000.00. Luego de analizar tu capacidad de endeudamiento
-					te enviaremos una respuesta en las próximas te enviaremos una respuesta en las próximas 48 horas.
+					te enviaremos una respuesta en las próximas 48 horas.
 				</body-1><br />
 				<body-1>
-					Estos son los detalles de tú solicitud :
+					Estos son los detalles de tu solicitud:
 				</body-1>
-				<row style="text-align: center;">
-					<p><br /> <b class="primary--text">Monto solicitado</b> <br />$2.000.00 </p>
-					<p> <b class="primary--text">Número de solicitud</b><br /> 1105490819</p>
-					<p> <b class="primary--text">Fecha de solicitud</b><br /> 02/12/2022 </p>
-					<p> <b class="primary--text">Código personal de seguimiento de crédito </b><br />
+				<row style="text-align: center;" cols="4" xs="5" sm="8" md="5" lg="3" xl="4">
+					<p cols="4" xs="5" sm="8" md="5" lg="3" xl="4"><br /> <b class="primary--text">Monto solicitado</b> <br />$2.000.00 </p>
+					<p cols="4" xs="5" sm="8" md="5" lg="3" xl="4"> <b class="primary--text">Número de solicitud</b><br /> 1105490819</p>
+					<p cols="4" xs="5" sm="8" md="5" lg="3" xl="4"> <b class="primary--text">Fecha de solicitud</b><br /> {{ currentDate }} </p>
+					<p cols="4" xs="5" sm="8" md="5" lg="3" xl="4"> <b class="primary--text">Código personal de seguimiento de crédito </b><br />
 						120293847729202890129</p>
 				</row>
 			</v-col>
 		</v-row>
 		<v-row class="justify-center">
-			<v-col cols="2">
+			<v-col  cols="6" xs="5" sm="8" md="5" lg="3" xl="4">
 				<Button text="Regresar" :click="() => { $router.push('/inicio') }" />
 			</v-col>
 		</v-row>
-
 	</div>
 </template>
+
 <script>
 import { mdiAccount } from '@mdi/js'
 import { mdiCardAccountDetailsOutline } from '@mdi/js';
@@ -41,6 +38,7 @@ import netImg from '@/assets/img/freelance.png'
 import camImg from '@/assets/img/web-cam.png'
 import mapImg from '@/assets/img/map.png'
 import Button from '@/components/Button.vue';
+
 export default {
 	name: 'Home',
 	data: () => ({
@@ -77,6 +75,16 @@ export default {
 	components: {
 		Button
 	},
+	computed: {
+		currentDate() {
+			const today = new Date();
+			const dd = String(today.getDate()).padStart(2, '0');
+			const mm = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0!
+			const yyyy = today.getFullYear();
+
+			return `${dd}/${mm}/${yyyy}`;
+		}
+	},
 	watch: {
 		loader() {
 			const l = this.loader
@@ -89,6 +97,7 @@ export default {
 	},
 }
 </script>
+
 <style>
 .initial {
 	text-align: center;

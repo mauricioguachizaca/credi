@@ -3,12 +3,12 @@
 		<v-card elevation="4" class="rounded-lg">
 			<v-row class="pa-4 justify-center">
 
-				<v-col cols="7" class="py-0">
+				<v-col cols="10" class="py-0" xs="16" sm="10" md="17" lg="12" xl="12">
 					<p class="mb-0 primary--text font-weight-bold text-center" style="font-size: 25px;">Consulta el
 						estado de tu crédito</p>
 				</v-col>
 
-				<v-col cols="7">
+				<v-col cols="12" sm="8" md="7" lg="7" xl="7">
 					<div class="px-5 py-3 rounded-lg d-flex" style="color:#222831; background-color: #e9f7ff">
 						<v-icon class="primary--text mr-4">
 							mdi-information-outline
@@ -20,20 +20,20 @@
 					</div>
 				</v-col>
 
-				<v-col cols="7">
+				<v-col cols="11"  sm="8" md="7" lg="7" xl="7">
 					<v-row class="flex-column" dense>
 						<p class="mb-1" style="color: #9f9ea2;">Id de solicitud</p>
-						<v-text-field class="rounded-lg" label="3717123" solo full-width hide-details
+						<v-text-field class="rounded-lg" label="Ej:3717123" solo full-width hide-details
 							background-color="#f4f4f4" flat v-model="idCredit"></v-text-field>
 					</v-row>
 				</v-col>
 
-				<v-col cols="7">
+				<v-col cols="11" sm="8" md="7" lg="7" xl="7">
 					<v-row class="justify-center">
-						<v-col cols="6">
+						<v-col cols="16" sm="6" md="6" lg="6" xl="6">
 							<Button text="Regresar" :isText="true" :click="() => { $router.push('/inicio') }" />
 						</v-col>
-						<v-col cols="6">
+						<v-col cols="16" sm="6" md="6" lg="6" xl="6">
 							<Button text="Consultar crédito" :click="validate" />
 						</v-col>
 					</v-row>

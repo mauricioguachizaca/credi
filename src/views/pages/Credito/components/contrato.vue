@@ -24,7 +24,7 @@ export default {
   methods: {
     async fetchContract() {
       try {
-        const response = await axios.post('http://54.211.53.237:4000/api/credit/getContract', {
+        const response = await axios.post('http://20.84.48.225:5008/api/credit/getContract', {
           // Aquí puedes incluir cualquier dato adicional que necesites enviar en la petición POST
         });
         // Extraer el campo "contract" de la respuesta

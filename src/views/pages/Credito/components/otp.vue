@@ -70,7 +70,7 @@ export default {
       };
 
       try {
-        const response = await fetch('http://54.211.53.237:4000/api/credit/addCredit', {
+        const response = await fetch('http://20.84.48.225:5008/api/credit/addCredit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
